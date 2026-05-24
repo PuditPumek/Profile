@@ -1,0 +1,27 @@
+{
+  "skills": [
+    {
+      "icon": "⚡",
+      "name": "New Skill",
+      "pct": 50
+    }
+  ],
+  "projects": [
+    {
+      "tag": "WEB APP",
+      "tagclass": "tw",
+      "name": "New Project",
+      "desc": "",
+      "tech": ""
+    }
+  ],
+  "avatarUrl": "/uploads/avatar.jpg",
+  "name": "Pudit Binthaisong",
+  "role": "FULL STACK DEVELOPER",
+  "subtitle": "Building things for the web",
+  "bio": "",
+  "email": "mekawinlnwza@gmail.com",
+  "github": "https://github.com/PuditPumek",
+  "linkedin": "https://linkedin.com/in/yourusername",
+  "instagram": "https://www.instagram.com/pd_.pudit/"
+}

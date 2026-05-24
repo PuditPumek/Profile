@@ -126,48 +126,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid rgba(255,255,255,.0
 <div class="glow1"></div>
 <div class="glow2"></div>
 
-<!-- EDIT MODAL -->
-<div class="modal-bg" id="mb">
-  <div class="modal">
-    <button class="mclose" id="mcl">✕</button>
-    <h2>✏️ แก้ไขข้อมูล Profile</h2>
-    <div class="tabs">
-      <button class="tab on" data-t="info">ข้อมูลทั่วไป</button>
-      <button class="tab" data-t="skills">Skills</button>
-      <button class="tab" data-t="projects">Projects</button>
-      <button class="tab" data-t="contact">Contact</button>
-    </div>
-
-    <div class="pane on" id="pane-info">
-      <div class="fg"><label class="fl">ชื่อ (NAME)</label><input class="fi" id="fn" placeholder="ชื่อคุณ"></div>
-      <div class="fg"><label class="fl">ตำแหน่ง / ROLE</label><input class="fi" id="fr2" placeholder="FULL STACK DEVELOPER"></div>
-      <div class="fg"><label class="fl">หัวข้อรอง</label><input class="fi" id="fs" placeholder="Building things for the web"></div>
-      <div class="fg"><label class="fl">แนะนำตัวเอง (BIO)</label><textarea class="fi" id="fb" rows="3" placeholder="Developer ที่ชอบแก้ปัญหาด้วยโค้ด..."></textarea></div>
-    </div>
-
-    <div class="pane" id="pane-skills">
-      <div id="ske"></div>
-    </div>
-
-    <div class="pane" id="pane-projects">
-      <div id="pje"></div>
-    </div>
-
-    <div class="pane" id="pane-contact">
-      <div class="fg"><label class="fl">EMAIL</label><input class="fi" id="fe" placeholder="email@example.com"></div>
-      <div class="fg"><label class="fl">GITHUB URL</label><input class="fi" id="fg2" placeholder="https://github.com/username"></div>
-      <div class="fg"><label class="fl">LINKEDIN URL</label><input class="fi" id="fli" placeholder="https://linkedin.com/in/username"></div>
-      <div class="fg"><label class="fl">INSTAGRAM URL</label><input class="fi" id="fig" placeholder="https://instagram.com/username"></div>
-    </div>
-
-    <div id="toast" class="toast">บันทึกสำเร็จแล้ว! ✓</div>
-    <div class="mact">
-      <button class="bcn" id="mreset">🔄 รีเซ็ท</button>
-      <button class="bcn" id="mcanc">ยกเลิก</button>
-      <button class="bsv" id="msav">บันทึก</button>
-    </div>
-  </div>
-</div>
+<!-- Admin interface available at /admin -->
 
 <!-- PROFILE PAGE -->
 <div class="wrap">
@@ -188,11 +147,11 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid rgba(255,255,255,.0
       <p class="hdesc" id="db">Developer ที่ชอบแก้ปัญหาด้วยโค้ด สร้าง product ที่ใช้งานได้จริง และเรียนรู้เทคโนโลยีใหม่อยู่เสมอ</p>
       <div class="cta">
         <a href="#projects" class="btn btn-p">ดู Portfolio ↗</a>
-        <button class="btn btn-e" id="openbtn">✏️ แก้ไขข้อมูล</button>
+        <a href="/admin" class="btn btn-e">Admin Login</a>
       </div>
     </div>
     <div class="awr">
-      <div class="aring"><div class="ain"><img src="รูป/DSC03120.JPG" alt="Profile"></div></div>
+      <div class="aring"><div class="ain" id="avatarWrap"><img src="รูป/DSC03120.JPG" alt="Profile" id="avatarImg"></div></div>
       <div class="sdot"></div>
     </div>
   </div>
@@ -230,11 +189,11 @@ var D = {
   instagram: 'https://instagram.com/yourusername',
   skills: [
     { icon: '⚛️', name: 'React / Next.js', pct: 90 },
-    { icon: '🐍', name: 'Python',           pct: 80 },
-    { icon: '🟨', name: 'JavaScript / TS',  pct: 85 },
-    { icon: '🐳', name: 'Docker / DevOps',  pct: 70 },
-    { icon: '🗄️', name: 'SQL / NoSQL',      pct: 75 },
-    { icon: '☁️', name: 'Cloud (AWS/GCP)',  pct: 65 }
+    { icon: '🐍', name: 'Python', pct: 80 },
+    { icon: '🟨', name: 'JavaScript / TS', pct: 85 },
+    { icon: '🐳', name: 'Docker / DevOps', pct: 70 },
+    { icon: '🗄️', name: 'SQL / NoSQL', pct: 75 },
+    { icon: '☁️', name: 'Cloud (AWS/GCP)', pct: 65 }
   ],
   projects: [
     { tag: 'WEB APP', tagclass: 'tw', name: 'Project Alpha', desc: 'ระบบจัดการข้อมูลแบบ Real-time พัฒนาด้วย React และ WebSocket', tech: 'React,Node.js,PostgreSQL' },
@@ -243,32 +202,13 @@ var D = {
   ]
 };
 
-function saveData() {
-  localStorage.setItem('devProfileData', JSON.stringify(D));
-}
-
-function loadData() {
-  var saved = localStorage.getItem('devProfileData');
-  if (saved) {
-    try {
-      var parsed = JSON.parse(saved);
-      if (parsed && typeof parsed === 'object') {
-        D = Object.assign({}, D, parsed);
-        D.skills = Array.isArray(parsed.skills) ? parsed.skills : D.skills;
-        D.projects = Array.isArray(parsed.projects) ? parsed.projects : D.projects;
-      }
-    } catch(e) {
-      console.log('ไม่สามารถโหลดข้อมูลที่บันทึกไว้');
-    }
-  }
-}
-
 function render() {
   document.getElementById('dn').textContent = D.name;
   document.getElementById('dr').textContent = D.role;
   document.getElementById('ds').textContent = D.subtitle;
   document.getElementById('db').textContent = D.bio;
   document.getElementById('df').textContent = '© ' + new Date().getFullYear() + ' — ' + D.name;
+
   var skills = Array.isArray(D.skills) ? D.skills : [];
   document.getElementById('dsk').innerHTML = skills.map(function(s) {
     return '<div class="scard"><div class="si">' + (s.icon || '') + '</div>'
@@ -285,6 +225,12 @@ function render() {
       + '<div class="pst">' + techs + '</div></div>';
   }).join('');
 
+  // อัปเดตรูป avatar ถ้ามี avatarUrl จาก API
+  var avatarImg = document.getElementById('avatarImg');
+  if (D.avatarUrl && avatarImg) {
+    avatarImg.src = D.avatarUrl + '?t=' + Date.now();
+  }
+
   var cr = document.getElementById('dc');
   cr.innerHTML = '';
   if (D.email)    cr.innerHTML += '<a class="cl" href="mailto:' + D.email + '"><span>📧</span> ' + D.email + '</a>';
@@ -293,107 +239,24 @@ function render() {
   if (D.instagram) cr.innerHTML += '<a class="cl" href="' + D.instagram + '" target="_blank"><span>📷</span> Instagram</a>';
 }
 
-function renderSkEd() {
-  document.getElementById('ske').innerHTML = D.skills.map(function(s, i) {
-    return '<div class="ser"><span style="font-size:18px">' + s.icon + '</span>'
-      + '<input type="text" value="' + s.name + '" data-i="' + i + '" class="skt">'
-      + '<input type="range" min="10" max="100" step="5" value="' + s.pct + '" data-i="' + i + '" class="skr">'
-      + '<span class="sp" id="sp' + i + '">' + s.pct + '%</span></div>';
-  }).join('');
-
-  document.querySelectorAll('.skt').forEach(function(el) {
-    el.addEventListener('input', function() { D.skills[+this.dataset.i].name = this.value; });
-  });
-  document.querySelectorAll('.skr').forEach(function(el) {
-    el.addEventListener('input', function() {
-      var i = +this.dataset.i;
-      D.skills[i].pct = +this.value;
-      document.getElementById('sp' + i).textContent = this.value + '%';
+function loadProfile() {
+  fetch('/api/profile')
+    .then(function(res) {
+      if (!res.ok) throw new Error('ไม่สามารถโหลดข้อมูลโปรไฟล์ได้');
+      return res.json();
+    })
+    .then(function(data) {
+      D = Object.assign({}, D, data);
+      D.skills = Array.isArray(data.skills) ? data.skills : D.skills;
+      D.projects = Array.isArray(data.projects) ? data.projects : D.projects;
+      render();
+    })
+    .catch(function() {
+      render();
     });
-  });
 }
 
-function renderPrjEd() {
-  document.getElementById('pje').innerHTML = D.projects.map(function(p, i) {
-    return '<div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px;margin-bottom:12px;">'
-      + '<div class="fg"><label class="fl">Tag</label><input type="text" value="' + p.tag + '" data-i="' + i + '" class="fi pjt" placeholder="WEB APP"></div>'
-      + '<div class="fg"><label class="fl">Name</label><input type="text" value="' + p.name + '" data-i="' + i + '" class="fi pjn" placeholder="Project Name"></div>'
-      + '<div class="fg"><label class="fl">Description</label><textarea class="fi pjd" rows="2" data-i="' + i + '" placeholder="Project description">' + p.desc + '</textarea></div>'
-      + '<div class="fg"><label class="fl">Technologies (comma separated)</label><input type="text" value="' + p.tech + '" data-i="' + i + '" class="fi pjtc" placeholder="React,Node.js,PostgreSQL"></div>'
-      + '</div>';
-  }).join('');
-
-  document.querySelectorAll('.pjt').forEach(function(el) {
-    el.addEventListener('input', function() { D.projects[+this.dataset.i].tag = this.value; });
-  });
-  document.querySelectorAll('.pjn').forEach(function(el) {
-    el.addEventListener('input', function() { D.projects[+this.dataset.i].name = this.value; });
-  });
-  document.querySelectorAll('.pjd').forEach(function(el) {
-    el.addEventListener('input', function() { D.projects[+this.dataset.i].desc = this.value; });
-  });
-  document.querySelectorAll('.pjtc').forEach(function(el) {
-    el.addEventListener('input', function() { D.projects[+this.dataset.i].tech = this.value; });
-  });
-}
-
-function openEdit() {
-  document.getElementById('fn').value  = D.name;
-  document.getElementById('fr2').value = D.role;
-  document.getElementById('fs').value  = D.subtitle;
-  document.getElementById('fb').value  = D.bio;
-  document.getElementById('fe').value  = D.email;
-  document.getElementById('fg2').value = D.github;
-  document.getElementById('fli').value = D.linkedin;
-  document.getElementById('fig').value = D.instagram;
-  document.getElementById('toast').style.display = 'none';
-  renderSkEd();
-  renderPrjEd();
-  document.getElementById('mb').classList.add('open');
-  window.scrollTo(0, 0);
-}
-
-function closeEdit() {
-  document.getElementById('mb').classList.remove('open');
-}
-
-document.getElementById('openbtn').addEventListener('click', openEdit);
-document.getElementById('mcl').addEventListener('click', closeEdit);
-document.getElementById('mreset').addEventListener('click', openEdit);
-document.getElementById('mcanc').addEventListener('click', closeEdit);
-
-document.getElementById('mb').addEventListener('click', function(e) {
-  if (e.target === this) closeEdit();
-});
-
-document.querySelectorAll('.tab').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    var t = this.dataset.t;
-    document.querySelectorAll('.tab').forEach(function(b) { b.classList.remove('on'); });
-    document.querySelectorAll('.pane').forEach(function(p) { p.classList.remove('on'); });
-    this.classList.add('on');
-    document.getElementById('pane-' + t).classList.add('on');
-  });
-});
-
-document.getElementById('msav').addEventListener('click', function() {
-  D.name     = document.getElementById('fn').value  || D.name;
-  D.role     = document.getElementById('fr2').value || D.role;
-  D.subtitle = document.getElementById('fs').value  || D.subtitle;
-  D.bio      = document.getElementById('fb').value  || D.bio;
-  D.email    = document.getElementById('fe').value;
-  D.github   = document.getElementById('fg2').value;
-  D.linkedin = document.getElementById('fli').value;
-  D.instagram = document.getElementById('fig').value;
-  saveData();
-  render();
-  var t = document.getElementById('toast');
-  t.style.display = 'block';
-  setTimeout(function() { t.style.display = 'none'; closeEdit(); }, 1500);
-});
-
-loadData();
-render();
+document.addEventListener('DOMContentLoaded', loadProfile);
 </script>
 </body>
 </html>

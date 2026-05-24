@@ -1,0 +1,65 @@
+{
+  "name": "Pudit Binthaisong",
+  "role": "FULL STACK DEVELOPER",
+  "subtitle": "Building things for the web",
+  "bio": "Developer ที่ชอบแก้ปัญหาด้วยโค้ด สร้าง product ที่ใช้งานได้จริง และเรียนรู้เทคโนโลยีใหม่อยู่เสมอ",
+  "email": "mekawinlnwza@gmail.com",
+  "github": "https://github.com/PuditPumek",
+  "linkedin": "https://linkedin.com/in/yourusername",
+  "instagram": "https://www.instagram.com/pd_.pudit/",
+  "skills": [
+    {
+      "icon": "⚛️",
+      "name": "React / Next.js",
+      "pct": 90
+    },
+    {
+      "icon": "🐍",
+      "name": "Python",
+      "pct": 80
+    },
+    {
+      "icon": "🟨",
+      "name": "JavaScript / TS",
+      "pct": 85
+    },
+    {
+      "icon": "🐳",
+      "name": "Docker / DevOps",
+      "pct": 70
+    },
+    {
+      "icon": "🗄️",
+      "name": "SQL / NoSQL",
+      "pct": 75
+    },
+    {
+      "icon": "☁️",
+      "name": "Cloud (AWS/GCP)",
+      "pct": 65
+    }
+  ],
+  "projects": [
+    {
+      "tag": "WEB APP",
+      "tagclass": "tw",
+      "name": "Project Alpha",
+      "desc": "ระบบจัดการข้อมูลแบบ Real-time พัฒนาด้วย React และ WebSocket",
+      "tech": "React,Node.js,PostgreSQL"
+    },
+    {
+      "tag": "API",
+      "tagclass": "ta",
+      "name": "REST API Service",
+      "desc": "Backend API ที่รองรับผู้ใช้กว่า 10,000 คน ด้วย FastAPI",
+      "tech": "Python,FastAPI,Redis"
+    },
+    {
+      "tag": "AI/ML",
+      "tagclass": "tm",
+      "name": "AI Chatbot",
+      "desc": "Chatbot อัจฉริยะที่ใช้ LLM ช่วยตอบคำถามลูกค้าอัตโนมัติ",
+      "tech": "Python,LangChain,OpenAI"
+    }
+  ]
+}
