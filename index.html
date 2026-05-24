@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0a0f;color:#e2e8f0;font-family:'Space Grotesk',sans-serif;min-height:100vh;overflow-x:hidden}
+.bg-grid{position:fixed;inset:0;background-image:linear-gradient(rgba(99,102,241,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+.glow1{position:fixed;width:400px;height:400px;border-radius:50%;filter:blur(80px);background:rgba(99,102,241,.08);top:-100px;right:-100px;pointer-events:none;z-index:0}
+.glow2{position:fixed;width:300px;height:300px;border-radius:50%;filter:blur(80px);background:rgba(16,185,129,.06);bottom:10%;left:-80px;pointer-events:none;z-index:0}
+.wrap{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:40px 24px 80px}
+
+/* NAV */
+nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:64px;animation:fadeDown .6s ease both}
+.logo{font-family:'JetBrains Mono',monospace;font-size:14px;color:#6366f1;letter-spacing:2px}
+.navlinks{display:flex;gap:28px;list-style:none}
+.navlinks a{font-size:13px;color:#94a3b8;text-decoration:none;cursor:pointer;transition:color .2s}
+.navlinks a:hover{color:#e2e8f0}
+
+/* HERO */
+.hero{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;margin-bottom:80px;animation:fadeUp .7s ease .1s both}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;color:#6366f1;letter-spacing:3px;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.eyebrow::before{content:'';display:inline-block;width:20px;height:1px;background:#6366f1}
+h1{font-size:clamp(36px,6vw,58px);font-weight:700;line-height:1.1;letter-spacing:-2px;margin-bottom:8px}
+.hl{background:linear-gradient(135deg,#6366f1,#10b981);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.htitle{font-size:18px;font-weight:300;color:#64748b;margin-bottom:20px}
+.hdesc{font-size:15px;color:#94a3b8;line-height:1.7;max-width:480px}
+.awr{position:relative;flex-shrink:0}
+.aring{width:300px;height:300px;border-radius:24px;background:linear-gradient(135deg,#6366f1,#10b981);padding:2px}
+.ain{width:100%;height:100%;border-radius:16px;background:#0a0a0f;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ain img{width:100%;height:100%;object-fit:cover;border-radius:16px;display:block}
+.sdot{position:absolute;bottom:8px;right:8px;width:16px;height:16px;border-radius:50%;background:#10b981;border:3px solid #0a0a0f;animation:pulse 2s infinite}
+.cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;border:none;font-family:'Space Grotesk',sans-serif;text-decoration:none}
+.btn-p{background:#6366f1;color:#fff}
+.btn-p:hover{background:#818cf8;transform:translateY(-1px)}
+.btn-e{background:rgba(99,102,241,.12);color:#818cf8;border:1px solid rgba(99,102,241,.3)}
+.btn-e:hover{background:rgba(99,102,241,.2);transform:translateY(-1px)}
+
+/* SECTIONS */
+.sec{margin-bottom:60px}
+.sh{display:flex;align-items:center;gap:12px;margin-bottom:28px}
+.sl{font-family:'JetBrains Mono',monospace;font-size:11px;color:#475569;letter-spacing:3px}
+.sline{flex:1;height:1px;background:rgba(255,255,255,.05)}
+
+/* SKILLS */
+.sgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;animation:fadeUp .7s ease .3s both}
+.scard{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;transition:all .2s}
+.scard:hover{background:rgba(99,102,241,.06);border-color:rgba(99,102,241,.3);transform:translateY(-2px)}
+.si{font-size:20px;margin-bottom:8px}
+.sn{font-size:13px;font-weight:600;color:#e2e8f0;margin-bottom:4px}
+.slv{height:3px;background:rgba(255,255,255,.06);border-radius:99px;overflow:hidden;margin-top:10px}
+.sf{height:100%;border-radius:99px;background:linear-gradient(90deg,#6366f1,#10b981)}
+
+/* PROJECTS */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;animation:fadeUp .7s ease .4s both}
+.pc{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;transition:all .2s;position:relative;overflow:hidden}
+.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,#6366f1,#10b981);opacity:0;transition:opacity .2s}
+.pc:hover{background:rgba(255,255,255,.04);border-color:rgba(99,102,241,.2);transform:translateY(-3px)}
+.pc:hover::before{opacity:1}
+.ptag{display:inline-block;padding:3px 10px;border-radius:99px;font-size:10px;font-weight:600;letter-spacing:1px;margin-bottom:12px}
+.tw{background:rgba(99,102,241,.15);color:#818cf8}
+.ta{background:rgba(16,185,129,.15);color:#34d399}
+.tm{background:rgba(245,158,11,.15);color:#fbbf24}
+.pn{font-size:16px;font-weight:600;color:#e2e8f0;margin-bottom:8px}
+.pd{font-size:13px;color:#64748b;line-height:1.6}
+.pst{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.st{font-family:'JetBrains Mono',monospace;font-size:10px;padding:3px 8px;border-radius:4px;background:rgba(255,255,255,.04);color:#475569;border:1px solid rgba(255,255,255,.06)}
+
+/* CONTACT */
+.crow{display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp .7s ease .5s both}
+.cl{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:10px;font-size:13px;color:#94a3b8;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.02);text-decoration:none;transition:all .2s}
+.cl:hover{color:#e2e8f0;border-color:rgba(99,102,241,.4);background:rgba(99,102,241,.08)}
+
+/* FOOTER */
+footer{margin-top:60px;padding-top:24px;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;color:#334155;animation:fadeUp .7s ease .6s both}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:100;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto}
+.modal-bg.open{display:flex}
+.modal{background:#0f1117;border:1px solid rgba(99,102,241,.3);border-radius:16px;padding:28px;width:100%;max-width:580px;margin:auto;position:relative}
+.modal h2{font-size:16px;font-weight:600;color:#e2e8f0;margin-bottom:20px}
+.mclose{position:absolute;top:20px;right:20px;background:rgba(255,255,255,.06);border:none;color:#94a3b8;width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:sans-serif}
+.mclose:hover{background:rgba(255,255,255,.12);color:#e2e8f0}
+.tabs{display:flex;margin-bottom:20px;border-bottom:1px solid rgba(255,255,255,.06)}
+.tab{padding:8px 16px;font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer;color:#475569;border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.tab.on{color:#818cf8;border-bottom-color:#6366f1}
+.tab:hover:not(.on){color:#94a3b8}
+.pane{display:none}
+.pane.on{display:block}
+.fl{font-size:11px;font-weight:600;color:#475569;letter-spacing:1px;margin-bottom:6px;display:block}
+.fg{margin-bottom:14px}
+.fi{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:10px 12px;font-size:13px;color:#e2e8f0;font-family:'Space Grotesk',sans-serif;outline:none;transition:border-color .2s}
+.fi:focus{border-color:rgba(99,102,241,.5)}
+.fi::placeholder{color:#334155}
+.ser{display:flex;align-items:center;gap:10px;margin-bottom:10px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:10px}
+.ser input[type=text]{flex:1;background:transparent;border:none;color:#e2e8f0;font-size:13px;font-family:'Space Grotesk',sans-serif;outline:none}
+.ser input[type=range]{width:80px}
+.sp{font-size:11px;color:#6366f1;font-family:'JetBrains Mono',monospace;min-width:30px;text-align:right}
+.mact{display:flex;gap:10px;margin-top:20px;justify-content:flex-end}
+.bsv{background:#6366f1;color:#fff;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.bsv:hover{background:#818cf8}
+.bcn{background:transparent;color:#64748b;padding:10px 20px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,.08);font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.bcn:hover{color:#94a3b8}
+.toast{background:#10b981;color:#fff;padding:10px 22px;border-radius:10px;font-size:13px;font-weight:600;text-align:center;margin-top:16px;display:none}
+
+/* ANIMATIONS */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}50%{box-shadow:0 0 0 6px rgba(16,185,129,0)}}
+
+@media(max-width:580px){
+  .hero{grid-template-columns:1fr}
+  .awr{display:none}
+  h1{font-size:36px}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-grid"></div>
+<div class="glow1"></div>
+<div class="glow2"></div>
+
+<!-- EDIT MODAL -->
+<div class="modal-bg" id="mb">
+  <div class="modal">
+    <button class="mclose" id="mcl">✕</button>
+    <h2>✏️ แก้ไขข้อมูล Profile</h2>
+    <div class="tabs">
+      <button class="tab on" data-t="info">ข้อมูลทั่วไป</button>
+      <button class="tab" data-t="skills">Skills</button>
+      <button class="tab" data-t="projects">Projects</button>
+      <button class="tab" data-t="contact">Contact</button>
+    </div>
+
+    <div class="pane on" id="pane-info">
+      <div class="fg"><label class="fl">ชื่อ (NAME)</label><input class="fi" id="fn" placeholder="ชื่อคุณ"></div>
+      <div class="fg"><label class="fl">ตำแหน่ง / ROLE</label><input class="fi" id="fr2" placeholder="FULL STACK DEVELOPER"></div>
+      <div class="fg"><label class="fl">หัวข้อรอง</label><input class="fi" id="fs" placeholder="Building things for the web"></div>
+      <div class="fg"><label class="fl">แนะนำตัวเอง (BIO)</label><textarea class="fi" id="fb" rows="3" placeholder="Developer ที่ชอบแก้ปัญหาด้วยโค้ด..."></textarea></div>
+    </div>
+
+    <div class="pane" id="pane-skills">
+      <div id="ske"></div>
+    </div>
+
+    <div class="pane" id="pane-projects">
+      <div id="pje"></div>
+    </div>
+
+    <div class="pane" id="pane-contact">
+      <div class="fg"><label class="fl">EMAIL</label><input class="fi" id="fe" placeholder="email@example.com"></div>
+      <div class="fg"><label class="fl">GITHUB URL</label><input class="fi" id="fg2" placeholder="https://github.com/username"></div>
+      <div class="fg"><label class="fl">LINKEDIN URL</label><input class="fi" id="fli" placeholder="https://linkedin.com/in/username"></div>
+      <div class="fg"><label class="fl">INSTAGRAM URL</label><input class="fi" id="fig" placeholder="https://instagram.com/username"></div>
+    </div>
+
+    <div id="toast" class="toast">บันทึกสำเร็จแล้ว! ✓</div>
+    <div class="mact">
+      <button class="bcn" id="mreset">🔄 รีเซ็ท</button>
+      <button class="bcn" id="mcanc">ยกเลิก</button>
+      <button class="bsv" id="msav">บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- PROFILE PAGE -->
+<div class="wrap">
+  <nav>
+    <div class="logo">// DEV.PROFILE</div>
+    <ul class="navlinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero" id="about">
+    <div>
+      <p class="eyebrow" id="dr">FULL STACK DEVELOPER</p>
+      <h1>สวัสดี, ผม<br><span class="hl" id="dn">ชื่อคุณ</span></h1>
+      <p class="htitle" id="ds">Building things for the web</p>
+      <p class="hdesc" id="db">Developer ที่ชอบแก้ปัญหาด้วยโค้ด สร้าง product ที่ใช้งานได้จริง และเรียนรู้เทคโนโลยีใหม่อยู่เสมอ</p>
+      <div class="cta">
+        <a href="#projects" class="btn btn-p">ดู Portfolio ↗</a>
+        <button class="btn btn-e" id="openbtn">✏️ แก้ไขข้อมูล</button>
+      </div>
+    </div>
+    <div class="awr">
+      <div class="aring"><div class="ain"><img src="รูป/DSC03120.JPG" alt="Profile"></div></div>
+      <div class="sdot"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sh"><span class="sl">SKILLS</span><div class="sline"></div></div>
+    <div class="sgrid" id="dsk"></div>
+  </div>
+
+  <div class="sec" id="projects">
+    <div class="sh"><span class="sl">PROJECTS</span><div class="sline"></div></div>
+    <div class="pgrid" id="dpj"></div>
+  </div>
+
+  <div class="sec" id="contact">
+    <div class="sh"><span class="sl">CONTACT</span><div class="sline"></div></div>
+    <div class="crow" id="dc"></div>
+  </div>
+
+  <footer>
+    <span id="df">© 2025 — ชื่อคุณ</span>
+    <span>Built with ❤️ & Claude</span>
+  </footer>
+</div>
+
+<script>
+var D = {
+  name: 'ชื่อคุณ',
+  role: 'FULL STACK DEVELOPER',
+  subtitle: 'Building things for the web',
+  bio: 'Developer ที่ชอบแก้ปัญหาด้วยโค้ด สร้าง product ที่ใช้งานได้จริง และเรียนรู้เทคโนโลยีใหม่อยู่เสมอ',
+  email: 'email@example.com',
+  github: 'https://github.com/yourusername',
+  linkedin: 'https://linkedin.com/in/yourusername',
+  instagram: 'https://instagram.com/yourusername',
+  skills: [
+    { icon: '⚛️', name: 'React / Next.js', pct: 90 },
+    { icon: '🐍', name: 'Python',           pct: 80 },
+    { icon: '🟨', name: 'JavaScript / TS',  pct: 85 },
+    { icon: '🐳', name: 'Docker / DevOps',  pct: 70 },
+    { icon: '🗄️', name: 'SQL / NoSQL',      pct: 75 },
+    { icon: '☁️', name: 'Cloud (AWS/GCP)',  pct: 65 }
+  ],
+  projects: [
+    { tag: 'WEB APP', tagclass: 'tw', name: 'Project Alpha', desc: 'ระบบจัดการข้อมูลแบบ Real-time พัฒนาด้วย React และ WebSocket', tech: 'React,Node.js,PostgreSQL' },
+    { tag: 'API', tagclass: 'ta', name: 'REST API Service', desc: 'Backend API ที่รองรับผู้ใช้กว่า 10,000 คน ด้วย FastAPI', tech: 'Python,FastAPI,Redis' },
+    { tag: 'AI/ML', tagclass: 'tm', name: 'AI Chatbot', desc: 'Chatbot อัจฉริยะที่ใช้ LLM ช่วยตอบคำถามลูกค้าอัตโนมัติ', tech: 'Python,LangChain,OpenAI' }
+  ]
+};
+
+function saveData() {
+  localStorage.setItem('devProfileData', JSON.stringify(D));
+}
+
+function loadData() {
+  var saved = localStorage.getItem('devProfileData');
+  if (saved) {
+    try {
+      var parsed = JSON.parse(saved);
+      if (parsed && typeof parsed === 'object') {
+        D = Object.assign({}, D, parsed);
+        D.skills = Array.isArray(parsed.skills) ? parsed.skills : D.skills;
+        D.projects = Array.isArray(parsed.projects) ? parsed.projects : D.projects;
+      }
+    } catch(e) {
+      console.log('ไม่สามารถโหลดข้อมูลที่บันทึกไว้');
+    }
+  }
+}
+
+function render() {
+  document.getElementById('dn').textContent = D.name;
+  document.getElementById('dr').textContent = D.role;
+  document.getElementById('ds').textContent = D.subtitle;
+  document.getElementById('db').textContent = D.bio;
+  document.getElementById('df').textContent = '© ' + new Date().getFullYear() + ' — ' + D.name;
+  var skills = Array.isArray(D.skills) ? D.skills : [];
+  document.getElementById('dsk').innerHTML = skills.map(function(s) {
+    return '<div class="scard"><div class="si">' + (s.icon || '') + '</div>'
+      + '<div class="sn">' + s.name + '</div>'
+      + '<div class="slv"><div class="sf" style="width:' + s.pct + '%"></div></div></div>';
+  }).join('');
+
+  var projects = Array.isArray(D.projects) ? D.projects : [];
+  document.getElementById('dpj').innerHTML = projects.map(function(p) {
+    var techs = (p.tech || '').split(',').map(function(t) { return '<span class="st">' + t.trim() + '</span>'; }).join('');
+    return '<div class="pc"><span class="ptag ' + p.tagclass + '">' + p.tag + '</span>'
+      + '<div class="pn">' + p.name + '</div>'
+      + '<p class="pd">' + p.desc + '</p>'
+      + '<div class="pst">' + techs + '</div></div>';
+  }).join('');
+
+  var cr = document.getElementById('dc');
+  cr.innerHTML = '';
+  if (D.email)    cr.innerHTML += '<a class="cl" href="mailto:' + D.email + '"><span>📧</span> ' + D.email + '</a>';
+  if (D.github)   cr.innerHTML += '<a class="cl" href="' + D.github + '" target="_blank"><span>🐙</span> GitHub</a>';
+  if (D.linkedin) cr.innerHTML += '<a class="cl" href="' + D.linkedin + '" target="_blank"><span>💼</span> LinkedIn</a>';
+  if (D.instagram) cr.innerHTML += '<a class="cl" href="' + D.instagram + '" target="_blank"><span>📷</span> Instagram</a>';
+}
+
+function renderSkEd() {
+  document.getElementById('ske').innerHTML = D.skills.map(function(s, i) {
+    return '<div class="ser"><span style="font-size:18px">' + s.icon + '</span>'
+      + '<input type="text" value="' + s.name + '" data-i="' + i + '" class="skt">'
+      + '<input type="range" min="10" max="100" step="5" value="' + s.pct + '" data-i="' + i + '" class="skr">'
+      + '<span class="sp" id="sp' + i + '">' + s.pct + '%</span></div>';
+  }).join('');
+
+  document.querySelectorAll('.skt').forEach(function(el) {
+    el.addEventListener('input', function() { D.skills[+this.dataset.i].name = this.value; });
+  });
+  document.querySelectorAll('.skr').forEach(function(el) {
+    el.addEventListener('input', function() {
+      var i = +this.dataset.i;
+      D.skills[i].pct = +this.value;
+      document.getElementById('sp' + i).textContent = this.value + '%';
+    });
+  });
+}
+
+function renderPrjEd() {
+  document.getElementById('pje').innerHTML = D.projects.map(function(p, i) {
+    return '<div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px;margin-bottom:12px;">'
+      + '<div class="fg"><label class="fl">Tag</label><input type="text" value="' + p.tag + '" data-i="' + i + '" class="fi pjt" placeholder="WEB APP"></div>'
+      + '<div class="fg"><label class="fl">Name</label><input type="text" value="' + p.name + '" data-i="' + i + '" class="fi pjn" placeholder="Project Name"></div>'
+      + '<div class="fg"><label class="fl">Description</label><textarea class="fi pjd" rows="2" data-i="' + i + '" placeholder="Project description">' + p.desc + '</textarea></div>'
+      + '<div class="fg"><label class="fl">Technologies (comma separated)</label><input type="text" value="' + p.tech + '" data-i="' + i + '" class="fi pjtc" placeholder="React,Node.js,PostgreSQL"></div>'
+      + '</div>';
+  }).join('');
+
+  document.querySelectorAll('.pjt').forEach(function(el) {
+    el.addEventListener('input', function() { D.projects[+this.dataset.i].tag = this.value; });
+  });
+  document.querySelectorAll('.pjn').forEach(function(el) {
+    el.addEventListener('input', function() { D.projects[+this.dataset.i].name = this.value; });
+  });
+  document.querySelectorAll('.pjd').forEach(function(el) {
+    el.addEventListener('input', function() { D.projects[+this.dataset.i].desc = this.value; });
+  });
+  document.querySelectorAll('.pjtc').forEach(function(el) {
+    el.addEventListener('input', function() { D.projects[+this.dataset.i].tech = this.value; });
+  });
+}
+
+function openEdit() {
+  document.getElementById('fn').value  = D.name;
+  document.getElementById('fr2').value = D.role;
+  document.getElementById('fs').value  = D.subtitle;
+  document.getElementById('fb').value  = D.bio;
+  document.getElementById('fe').value  = D.email;
+  document.getElementById('fg2').value = D.github;
+  document.getElementById('fli').value = D.linkedin;
+  document.getElementById('fig').value = D.instagram;
+  document.getElementById('toast').style.display = 'none';
+  renderSkEd();
+  renderPrjEd();
+  document.getElementById('mb').classList.add('open');
+  window.scrollTo(0, 0);
+}
+
+function closeEdit() {
+  document.getElementById('mb').classList.remove('open');
+}
+
+document.getElementById('openbtn').addEventListener('click', openEdit);
+document.getElementById('mcl').addEventListener('click', closeEdit);
+document.getElementById('mreset').addEventListener('click', openEdit);
+document.getElementById('mcanc').addEventListener('click', closeEdit);
+
+document.getElementById('mb').addEventListener('click', function(e) {
+  if (e.target === this) closeEdit();
+});
+
+document.querySelectorAll('.tab').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var t = this.dataset.t;
+    document.querySelectorAll('.tab').forEach(function(b) { b.classList.remove('on'); });
+    document.querySelectorAll('.pane').forEach(function(p) { p.classList.remove('on'); });
+    this.classList.add('on');
+    document.getElementById('pane-' + t).classList.add('on');
+  });
+});
+
+document.getElementById('msav').addEventListener('click', function() {
+  D.name     = document.getElementById('fn').value  || D.name;
+  D.role     = document.getElementById('fr2').value || D.role;
+  D.subtitle = document.getElementById('fs').value  || D.subtitle;
+  D.bio      = document.getElementById('fb').value  || D.bio;
+  D.email    = document.getElementById('fe').value;
+  D.github   = document.getElementById('fg2').value;
+  D.linkedin = document.getElementById('fli').value;
+  D.instagram = document.getElementById('fig').value;
+  saveData();
+  render();
+  var t = document.getElementById('toast');
+  t.style.display = 'block';
+  setTimeout(function() { t.style.display = 'none'; closeEdit(); }, 1500);
+});
+
+loadData();
+render();
+</script>
+</body>
+</html>
