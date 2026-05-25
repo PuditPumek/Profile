@@ -258,5 +258,25 @@ function loadProfile() {
 
 document.addEventListener('DOMContentLoaded', loadProfile);
 </script>
+
+<script>
+// Block F12 / Ctrl+Shift+I / Ctrl+U / Ctrl+Shift+J
+//document.addEventListener('keydown', function(e) {
+  if (
+    e.key === 'F12' ||
+    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+    (e.ctrlKey && (e.key === 'U' || e.key === 'u'))
+  ) {
+    e.preventDefault();
+    return false;
+  }
+//});
+ 
+// Block Right Click
+//document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  return false;
+//});
+</script>
 </body>
 </html>
