@@ -6,8 +6,8 @@ const multer = require('multer');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-const ADMIN_USER = process.env.ADMIN_USER || 'admin';
-const ADMIN_PASS = process.env.ADMIN_PASS || 'admin123';
+const ADMIN_USER = process.env.ADMIN_USER || 'pumek';
+const ADMIN_PASS = process.env.ADMIN_PASS || 'pudit@2010';
 const DATA_FILE = path.join(__dirname, 'profile.json');
 const UPLOAD_DIR = path.join(__dirname, 'uploads');
 
