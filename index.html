@@ -3,27 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dev Profile</title>
+<title>PuMek Dev</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 
-/* ===== THEMES ===== */
-:root {
+:root{
   --bg:#0a0a0f;--bg2:#0f1117;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b;--text4:#475569;
   --accent1:#6366f1;--accent2:#10b981;
   --card-bg:rgba(255,255,255,.02);--card-border:rgba(255,255,255,.06);
   --nav-link:#94a3b8;--footer:#334155;
   --glow1:rgba(99,102,241,.08);--glow2:rgba(16,185,129,.06);--grid-line:rgba(99,102,241,.03);
 }
-body[data-theme="light"] {
-  --bg:#f8fafc;--bg2:#ffffff;--text:#0a0a0f;--text2:#1e293b;--text3:#334155;--text4:#64748b;
+body[data-theme="light"]{
+  --bg:#f8fafc;--bg2:#fff;--text:#0a0a0f;--text2:#1e293b;--text3:#334155;--text4:#64748b;
   --accent1:#6366f1;--accent2:#10b981;
   --card-bg:rgba(0,0,0,.03);--card-border:rgba(0,0,0,.1);
   --nav-link:#334155;--footer:#94a3b8;
   --glow1:rgba(99,102,241,.06);--glow2:rgba(16,185,129,.04);--grid-line:rgba(99,102,241,.05);
 }
-body[data-theme="ocean"] {
+body[data-theme="ocean"]{
   --bg:#040d1a;--bg2:#071224;--text:#e0f2fe;--text2:#7dd3fc;--text3:#38bdf8;--text4:#0284c7;
   --accent1:#0ea5e9;--accent2:#06b6d4;
   --card-bg:rgba(14,165,233,.04);--card-border:rgba(14,165,233,.12);
@@ -33,12 +32,6 @@ body[data-theme="ocean"] {
 
 body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
 
-/* THEME TOGGLE */
-.theme-toggle{display:flex;align-items:center;gap:4px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:99px;padding:4px;transition:all .3s}
-.th-btn{width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;background:transparent;transition:all .2s;opacity:.5}
-.th-btn.active{background:var(--accent1);opacity:1;transform:scale(1.1)}
-.th-btn:hover:not(.active){opacity:.8}
-
 .bg-grid{position:fixed;inset:0;background-image:linear-gradient(var(--grid-line) 1px,transparent 1px),linear-gradient(90deg,var(--grid-line) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
 .glow1{position:fixed;width:400px;height:400px;border-radius:50%;filter:blur(80px);background:var(--glow1);top:-100px;right:-100px;pointer-events:none;z-index:0}
 .glow2{position:fixed;width:300px;height:300px;border-radius:50%;filter:blur(80px);background:var(--glow2);bottom:10%;left:-80px;pointer-events:none;z-index:0}
@@ -46,10 +39,25 @@ body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-ser
 
 /* NAV */
 nav{display:flex;justify-content:space-between;align-items:center;margin-bottom:64px;animation:fadeDown .6s ease both}
-.logo{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent1);letter-spacing:2px}
+.logo{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--accent1);letter-spacing:2px;cursor:pointer;user-select:none}
 .navlinks{display:flex;gap:28px;list-style:none}
 .navlinks a{font-size:13px;color:var(--nav-link);text-decoration:none;cursor:pointer;transition:color .2s}
 .navlinks a:hover{color:var(--text)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.theme-toggle{display:flex;align-items:center;gap:4px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:99px;padding:4px;transition:all .3s}
+.th-btn{width:32px;height:32px;border-radius:50%;border:none;cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;background:transparent;transition:all .2s;opacity:.5}
+.th-btn.active{background:var(--accent1);opacity:1;transform:scale(1.1)}
+.th-btn:hover:not(.active){opacity:.8}
+
+/* ADMIN BAR — แสดงเมื่อ login แล้ว */
+.admin-bar{display:none;position:fixed;bottom:24px;right:24px;z-index:200;flex-direction:column;gap:8px;align-items:flex-end}
+.admin-bar.show{display:flex}
+.admin-fab{display:flex;align-items:center;gap:8px;padding:10px 18px;border-radius:99px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:'Space Grotesk',sans-serif;transition:all .2s;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.fab-edit{background:var(--accent1);color:#fff}
+.fab-edit:hover{opacity:.85;transform:translateY(-2px)}
+.fab-logout{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3)}
+.fab-logout:hover{background:rgba(239,68,68,.25)}
+.admin-badge{background:var(--accent2);color:#fff;padding:4px 12px;border-radius:99px;font-size:11px;font-weight:600;font-family:'JetBrains Mono',monospace;letter-spacing:1px}
 
 /* HERO */
 .hero{display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;margin-bottom:80px;animation:fadeUp .7s ease .1s both}
@@ -68,8 +76,6 @@ h1{font-size:clamp(36px,6vw,58px);font-weight:700;line-height:1.1;letter-spacing
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 22px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;border:none;font-family:'Space Grotesk',sans-serif;text-decoration:none}
 .btn-p{background:var(--accent1);color:#fff}
 .btn-p:hover{opacity:.85;transform:translateY(-1px)}
-.btn-e{background:rgba(99,102,241,.12);color:var(--accent1);border:1px solid rgba(99,102,241,.3)}
-.btn-e:hover{background:rgba(99,102,241,.2);transform:translateY(-1px)}
 
 /* SECTIONS */
 .sec{margin-bottom:60px}
@@ -109,16 +115,79 @@ h1{font-size:clamp(36px,6vw,58px);font-weight:700;line-height:1.1;letter-spacing
 /* FOOTER */
 footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--card-border);display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--footer)}
 
-/* ANIMATIONS */
+/* ===== LOGIN MODAL ===== */
+.login-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);z-index:300;align-items:center;justify-content:center}
+.login-overlay.open{display:flex}
+.login-box{background:var(--bg2);border:1px solid rgba(99,102,241,.3);border-radius:20px;padding:36px;width:100%;max-width:380px;position:relative;animation:popIn .3s ease both}
+.login-logo{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent1);letter-spacing:3px;margin-bottom:24px;text-align:center}
+.login-box h2{font-size:20px;font-weight:700;color:var(--text);text-align:center;margin-bottom:6px}
+.login-sub{font-size:13px;color:var(--text3);text-align:center;margin-bottom:28px}
+.lf{margin-bottom:16px}
+.lf label{display:block;font-size:11px;font-weight:600;color:var(--text4);letter-spacing:1px;margin-bottom:6px}
+.lf input{width:100%;background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:12px 14px;font-size:14px;color:var(--text);font-family:'Space Grotesk',sans-serif;outline:none;transition:border-color .2s}
+.lf input:focus{border-color:rgba(99,102,241,.5);background:rgba(99,102,241,.04)}
+.lf input::placeholder{color:var(--text4)}
+.login-btn{width:100%;background:var(--accent1);color:#fff;border:none;padding:13px;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;font-family:'Space Grotesk',sans-serif;transition:all .2s;margin-top:4px}
+.login-btn:hover{opacity:.85}
+.login-btn:disabled{opacity:.5;cursor:not-allowed}
+.login-err{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#f87171;border-radius:8px;padding:10px 14px;font-size:12px;margin-top:12px;display:none;text-align:center}
+.login-close{position:absolute;top:16px;right:16px;background:var(--card-bg);border:none;color:var(--text3);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.login-close:hover{color:var(--text);background:var(--card-border)}
+.login-hint{font-size:11px;color:var(--text4);text-align:center;margin-top:16px;font-family:'JetBrains Mono',monospace}
+
+/* ===== EDIT MODAL ===== */
+.edit-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);z-index:300;align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto}
+.edit-overlay.open{display:flex}
+.edit-box{background:var(--bg2);border:1px solid rgba(99,102,241,.3);border-radius:16px;padding:28px;width:100%;max-width:620px;margin:auto;position:relative}
+.edit-box h2{font-size:16px;font-weight:600;color:var(--text);margin-bottom:20px}
+.edit-close{position:absolute;top:20px;right:20px;background:var(--card-bg);border:none;color:var(--text3);width:32px;height:32px;border-radius:8px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.edit-close:hover{color:var(--text)}
+.etabs{display:flex;border-bottom:1px solid var(--card-border);margin-bottom:20px}
+.etab{padding:8px 16px;font-size:12px;font-weight:600;letter-spacing:.5px;cursor:pointer;color:var(--text4);border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.etab.on{color:var(--accent1);border-bottom-color:var(--accent1)}
+.epane{display:none}
+.epane.on{display:block}
+.ef{margin-bottom:14px}
+.ef label{font-size:11px;font-weight:600;color:var(--text4);letter-spacing:1px;margin-bottom:6px;display:block}
+.ef input,.ef textarea,.ef select{width:100%;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--text);font-family:'Space Grotesk',sans-serif;outline:none;transition:border-color .2s}
+.ef input:focus,.ef textarea:focus{border-color:rgba(99,102,241,.5)}
+.ef textarea{min-height:80px;resize:vertical}
+.ef select option{background:var(--bg2)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.skill-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:8px;padding:10px}
+.skill-row input[type=text]{flex:1;background:transparent;border:none;color:var(--text);font-size:13px;font-family:'Space Grotesk',sans-serif;outline:none}
+.skill-row input[type=range]{width:80px}
+.skill-pct{font-size:11px;color:var(--accent1);font-family:'JetBrains Mono',monospace;min-width:32px;text-align:right}
+.proj-item{background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:14px;margin-bottom:12px}
+.proj-item h4{font-size:13px;color:var(--accent1);margin-bottom:10px}
+.add-btn{background:var(--accent2);color:#fff;border:none;padding:8px 16px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600;font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.add-btn:hover{opacity:.85}
+.del-btn{padding:6px 10px;background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3);border-radius:6px;cursor:pointer;font-size:12px;font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.del-btn:hover{background:rgba(239,68,68,.25)}
+.edit-actions{display:flex;gap:10px;margin-top:20px;justify-content:flex-end}
+.save-btn{background:var(--accent1);color:#fff;padding:10px 24px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;font-family:'Space Grotesk',sans-serif;transition:all .2s}
+.save-btn:hover{opacity:.85}
+.cancel-btn{background:transparent;color:var(--text3);padding:10px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:1px solid var(--card-border);font-family:'Space Grotesk',sans-serif;transition:all .2s}
+
+/* AVATAR UPLOAD */
+.avatar-row{display:flex;align-items:center;gap:16px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:10px;padding:14px;margin-bottom:14px}
+.avatar-thumb{width:70px;height:70px;border-radius:50%;overflow:hidden;background:var(--bg);border:2px solid rgba(99,102,241,.3);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.avatar-thumb img{width:100%;height:100%;object-fit:cover}
+.upload-label{display:inline-flex;align-items:center;gap:6px;background:var(--accent1);color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600}
+.upload-label:hover{opacity:.85}
+.upload-hint{font-size:11px;color:var(--text4);margin-top:4px}
+
+/* TOAST */
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);padding:10px 22px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transition:all .4s;z-index:999;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.toast.success{background:#10b981;color:#fff}
+.toast.error{background:#ef4444;color:#fff}
+
 @keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(16,185,129,.4)}50%{box-shadow:0 0 0 6px rgba(16,185,129,0)}}
-
-@media(max-width:580px){
-  .hero{grid-template-columns:1fr}
-  .awr{display:none}
-  h1{font-size:36px}
-}
+@keyframes popIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
+@media(max-width:580px){.hero{grid-template-columns:1fr}.awr{display:none}h1{font-size:36px}.grid2{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -127,10 +196,99 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--card-border);
 <div class="glow1"></div>
 <div class="glow2"></div>
 
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- LOGIN MODAL -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <button class="login-close" id="loginClose">✕</button>
+    <div class="login-logo">// DEV.PROFILE</div>
+    <h2>Admin Login</h2>
+    <p class="login-sub">เข้าสู่ระบบเพื่อแก้ไขข้อมูล</p>
+    <div class="lf">
+      <label>USERNAME</label>
+      <input type="text" id="lUser" placeholder="username" autocomplete="username">
+    </div>
+    <div class="lf">
+      <label>PASSWORD</label>
+      <input type="password" id="lPass" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <div class="login-err" id="loginErr">Username หรือ Password ไม่ถูกต้อง</div>
+    <button class="login-btn" id="loginBtn">เข้าสู่ระบบ</button>
+    <div class="login-hint">กด Ctrl+Shift+A เพื่อเปิด login</div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="edit-overlay" id="editOverlay">
+  <div class="edit-box">
+    <button class="edit-close" id="editClose">✕</button>
+    <h2>✏️ แก้ไขข้อมูล Profile</h2>
+    <div class="etabs">
+      <button class="etab on" data-p="info">ข้อมูลทั่วไป</button>
+      <button class="etab" data-p="skills">Skills</button>
+      <button class="etab" data-p="projects">Projects</button>
+      <button class="etab" data-p="contact">Contact</button>
+    </div>
+
+    <!-- INFO -->
+    <div class="epane on" id="epane-info">
+      <div class="avatar-row">
+        <div class="avatar-thumb" id="editAvatar">👨‍💻</div>
+        <div>
+          <label class="upload-label" for="avatarFile">📷 เปลี่ยนรูป</label>
+          <input type="file" id="avatarFile" accept="image/*" style="display:none">
+          <p class="upload-hint">JPG, PNG, WebP — ไม่เกิน 5MB</p>
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="ef"><label>ชื่อ</label><input id="eName" placeholder="ชื่อคุณ"></div>
+        <div class="ef"><label>ROLE</label><input id="eRole" placeholder="FULL STACK DEVELOPER"></div>
+      </div>
+      <div class="ef"><label>หัวข้อรอง</label><input id="eSub" placeholder="Building things for the web"></div>
+      <div class="ef"><label>BIO</label><textarea id="eBio" rows="3"></textarea></div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="epane" id="epane-skills">
+      <div id="skillsEditor"></div>
+      <button class="add-btn" id="addSkill">+ เพิ่ม Skill</button>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="epane" id="epane-projects">
+      <div id="projectsEditor"></div>
+      <button class="add-btn" id="addProject">+ เพิ่ม Project</button>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="epane" id="epane-contact">
+      <div class="ef"><label>EMAIL</label><input id="eEmail" placeholder="email@example.com"></div>
+      <div class="ef"><label>GITHUB URL</label><input id="eGithub" placeholder="https://github.com/..."></div>
+      <div class="ef"><label>LINKEDIN URL</label><input id="eLinkedin" placeholder="https://linkedin.com/in/..."></div>
+      <div class="ef"><label>INSTAGRAM URL</label><input id="eInstagram" placeholder="https://instagram.com/..."></div>
+    </div>
+
+    <div class="edit-actions">
+      <button class="cancel-btn" id="editCancel">ยกเลิก</button>
+      <button class="save-btn" id="editSave">💾 บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN FAB -->
+<div class="admin-bar" id="adminBar">
+  <span class="admin-badge">🔓 ADMIN MODE</span>
+  <button class="admin-fab fab-edit" id="fabEdit">✏️ แก้ไขข้อมูล</button>
+  <button class="admin-fab fab-logout" id="fabLogout">ออกจากระบบ</button>
+</div>
+
+<!-- PROFILE PAGE -->
 <div class="wrap">
   <nav>
-    <div class="logo">// DEV.PROFILE</div>
-    <div style="display:flex;align-items:center;gap:20px">
+    <div class="logo" id="logoClick">// DEV.PROFILE</div>
+    <div class="nav-right">
       <ul class="navlinks">
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
@@ -149,7 +307,7 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--card-border);
       <p class="eyebrow" id="dr">FULL STACK DEVELOPER</p>
       <h1>สวัสดี, ผม<br><span class="hl" id="dn">ชื่อคุณ</span></h1>
       <p class="htitle" id="ds">Building things for the web</p>
-      <p class="hdesc" id="db">Developer ที่ชอบแก้ปัญหาด้วยโค้ด สร้าง product ที่ใช้งานได้จริง และเรียนรู้เทคโนโลยีใหม่อยู่เสมอ</p>
+      <p class="hdesc" id="db">Developer ที่ชอบแก้ปัญหาด้วยโค้ด</p>
       <div class="cta">
         <a href="#projects" class="btn btn-p">ดู Portfolio ↗</a>
       </div>
@@ -184,102 +342,304 @@ footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--card-border);
 <script>
 var D = {
   name:'ชื่อคุณ',role:'FULL STACK DEVELOPER',subtitle:'Building things for the web',
-  bio:'Developer ที่ชอบแก้ปัญหาด้วยโค้ด สร้าง product ที่ใช้งานได้จริง และเรียนรู้เทคโนโลยีใหม่อยู่เสมอ',
-  email:'email@example.com',github:'https://github.com/yourusername',
-  linkedin:'https://linkedin.com/in/yourusername',instagram:'https://instagram.com/yourusername',
-  skills:[
-    {icon:'⚛️',name:'React / Next.js',pct:90},{icon:'🐍',name:'Python',pct:80},
-    {icon:'🟨',name:'JavaScript / TS',pct:85},{icon:'🐳',name:'Docker / DevOps',pct:70},
-    {icon:'🗄️',name:'SQL / NoSQL',pct:75},{icon:'☁️',name:'Cloud (AWS/GCP)',pct:65}
-  ],
-  projects:[
-    {tag:'WEB APP',tagclass:'tw',name:'Project Alpha',desc:'ระบบจัดการข้อมูลแบบ Real-time พัฒนาด้วย React และ WebSocket',tech:'React,Node.js,PostgreSQL'},
-    {tag:'API',tagclass:'ta',name:'REST API Service',desc:'Backend API ที่รองรับผู้ใช้กว่า 10,000 คน ด้วย FastAPI',tech:'Python,FastAPI,Redis'},
-    {tag:'AI/ML',tagclass:'tm',name:'AI Chatbot',desc:'Chatbot อัจฉริยะที่ใช้ LLM ช่วยตอบคำถามลูกค้าอัตโนมัติ',tech:'Python,LangChain,OpenAI'}
-  ]
+  bio:'Developer ที่ชอบแก้ปัญหาด้วยโค้ด',
+  email:'',github:'',linkedin:'',instagram:'',
+  skills:[],projects:[]
 };
+var AUTH = null;
+var isLoggedIn = false;
 
+/* ===== RENDER ===== */
 function render() {
   document.getElementById('dn').textContent = D.name;
   document.getElementById('dr').textContent = D.role;
   document.getElementById('ds').textContent = D.subtitle;
   document.getElementById('db').textContent = D.bio;
   document.getElementById('df').textContent = '© ' + new Date().getFullYear() + ' — ' + D.name;
+
   document.getElementById('dsk').innerHTML = (D.skills||[]).map(function(s){
     return '<div class="scard"><div class="si">'+(s.icon||'')+'</div>'
       +'<div class="sn">'+s.name+'</div>'
       +'<div class="slv"><div class="sf" style="width:'+s.pct+'%"></div></div></div>';
   }).join('');
+
   document.getElementById('dpj').innerHTML = (D.projects||[]).map(function(p){
-    var techs=(p.tech||'').split(',').map(function(t){return '<span class="st">'+t.trim()+'</span>';}).join('');
+    var t=(p.tech||'').split(',').map(function(x){return '<span class="st">'+x.trim()+'</span>';}).join('');
     return '<div class="pc"><span class="ptag '+p.tagclass+'">'+p.tag+'</span>'
       +'<div class="pn">'+p.name+'</div><p class="pd">'+p.desc+'</p>'
-      +'<div class="pst">'+techs+'</div></div>';
+      +'<div class="pst">'+t+'</div></div>';
   }).join('');
-  var avatarImg = document.getElementById('avatarImg');
-  if (D.avatarUrl && avatarImg) avatarImg.src = D.avatarUrl + '?t=' + Date.now();
+
   var cr = document.getElementById('dc');
   cr.innerHTML = '';
   if(D.email)    cr.innerHTML += '<a class="cl" href="mailto:'+D.email+'"><span>📧</span> '+D.email+'</a>';
   if(D.github)   cr.innerHTML += '<a class="cl" href="'+D.github+'" target="_blank"><span>🐙</span> GitHub</a>';
   if(D.linkedin) cr.innerHTML += '<a class="cl" href="'+D.linkedin+'" target="_blank"><span>💼</span> LinkedIn</a>';
   if(D.instagram)cr.innerHTML += '<a class="cl" href="'+D.instagram+'" target="_blank"><span>📷</span> Instagram</a>';
+
+  var img = document.getElementById('avatarImg');
+  if(D.avatarUrl && img) img.src = D.avatarUrl + '?t=' + Date.now();
 }
 
 function loadProfile() {
   fetch('/api/profile')
-    .then(function(res){ if(!res.ok) throw new Error(); return res.json(); })
-    .then(function(data){
-      D = Object.assign({},D,data);
-      D.skills   = Array.isArray(data.skills)   ? data.skills   : D.skills;
-      D.projects = Array.isArray(data.projects) ? data.projects : D.projects;
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      D = Object.assign({},D,d);
+      D.skills   = Array.isArray(d.skills)   ? d.skills   : [];
+      D.projects = Array.isArray(d.projects) ? d.projects : [];
       render();
-    })
-    .catch(function(){ render(); });
+    }).catch(function(){ render(); });
 }
 
-// ===== THEME TOGGLE =====
-function applyTheme(theme) {
-  if (theme === 'dark') document.body.removeAttribute('data-theme');
-  else document.body.setAttribute('data-theme', theme);
-  document.querySelectorAll('.th-btn').forEach(function(b){
-    b.classList.toggle('active', b.dataset.theme === theme);
+/* ===== TOAST ===== */
+function showToast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + (type||'success');
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 2500);
+}
+
+/* ===== LOGIN ===== */
+function openLogin() {
+  document.getElementById('loginOverlay').classList.add('open');
+  document.getElementById('lUser').focus();
+  document.getElementById('loginErr').style.display = 'none';
+}
+function closeLogin() {
+  document.getElementById('loginOverlay').classList.remove('open');
+}
+
+async function doLogin() {
+  var u = document.getElementById('lUser').value.trim();
+  var p = document.getElementById('lPass').value;
+  if(!u || !p) return;
+  var btn = document.getElementById('loginBtn');
+  btn.disabled = true; btn.textContent = 'กำลังตรวจสอบ...';
+  var cred = 'Basic ' + btoa(u + ':' + p);
+  try {
+    var res = await fetch('/api/profile', { headers: { 'Authorization': cred } });
+    if(res.ok) {
+      AUTH = cred;
+      isLoggedIn = true;
+      closeLogin();
+      document.getElementById('adminBar').classList.add('show');
+      showToast('เข้าสู่ระบบสำเร็จ! 🎉');
+      document.getElementById('lPass').value = '';
+    } else {
+      document.getElementById('loginErr').style.display = 'block';
+    }
+  } catch(e) {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+  btn.disabled = false; btn.textContent = 'เข้าสู่ระบบ';
+}
+
+document.getElementById('loginBtn').addEventListener('click', doLogin);
+document.getElementById('lPass').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
+document.getElementById('lUser').addEventListener('keydown', function(e){ if(e.key==='Enter') document.getElementById('lPass').focus(); });
+document.getElementById('loginClose').addEventListener('click', closeLogin);
+document.getElementById('loginOverlay').addEventListener('click', function(e){ if(e.target===this) closeLogin(); });
+
+/* ===== LOGOUT ===== */
+document.getElementById('fabLogout').addEventListener('click', function(){
+  AUTH = null; isLoggedIn = false;
+  document.getElementById('adminBar').classList.remove('show');
+  showToast('ออกจากระบบแล้ว');
+});
+
+/* ===== EDIT MODAL ===== */
+function openEdit() {
+  // ใส่ค่าปัจจุบัน
+  document.getElementById('eName').value = D.name || '';
+  document.getElementById('eRole').value = D.role || '';
+  document.getElementById('eSub').value  = D.subtitle || '';
+  document.getElementById('eBio').value  = D.bio || '';
+  document.getElementById('eEmail').value    = D.email || '';
+  document.getElementById('eGithub').value   = D.github || '';
+  document.getElementById('eLinkedin').value = D.linkedin || '';
+  document.getElementById('eInstagram').value= D.instagram || '';
+  // avatar preview
+  var at = document.getElementById('editAvatar');
+  if(D.avatarUrl) at.innerHTML = '<img src="'+D.avatarUrl+'" alt="avatar">';
+  else at.textContent = '👨‍💻';
+  renderSkillsEditor();
+  renderProjectsEditor();
+  // reset tabs
+  document.querySelectorAll('.etab').forEach(function(b){ b.classList.remove('on'); });
+  document.querySelectorAll('.epane').forEach(function(p){ p.classList.remove('on'); });
+  document.querySelector('.etab[data-p="info"]').classList.add('on');
+  document.getElementById('epane-info').classList.add('on');
+  document.getElementById('editOverlay').classList.add('open');
+}
+
+function closeEdit() { document.getElementById('editOverlay').classList.remove('open'); }
+
+document.getElementById('fabEdit').addEventListener('click', openEdit);
+document.getElementById('editClose').addEventListener('click', closeEdit);
+document.getElementById('editCancel').addEventListener('click', closeEdit);
+document.getElementById('editOverlay').addEventListener('click', function(e){ if(e.target===this) closeEdit(); });
+
+document.querySelectorAll('.etab').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.etab').forEach(function(b){ b.classList.remove('on'); });
+    document.querySelectorAll('.epane').forEach(function(p){ p.classList.remove('on'); });
+    this.classList.add('on');
+    document.getElementById('epane-'+this.dataset.p).classList.add('on');
+  });
+});
+
+/* SKILLS EDITOR */
+function renderSkillsEditor() {
+  document.getElementById('skillsEditor').innerHTML = (D.skills||[]).map(function(s,i){
+    return '<div class="skill-row">'
+      +'<span style="font-size:18px">'+s.icon+'</span>'
+      +'<input type="text" value="'+s.name+'" data-i="'+i+'" class="sk-name">'
+      +'<input type="range" min="10" max="100" step="5" value="'+s.pct+'" data-i="'+i+'" class="sk-pct">'
+      +'<span class="skill-pct" id="skp'+i+'">'+s.pct+'%</span>'
+      +'<button class="del-btn sk-del" data-i="'+i+'">✕</button>'
+      +'</div>';
+  }).join('');
+  document.querySelectorAll('.sk-name').forEach(function(el){
+    el.addEventListener('input', function(){ D.skills[+this.dataset.i].name = this.value; });
+  });
+  document.querySelectorAll('.sk-pct').forEach(function(el){
+    el.addEventListener('input', function(){
+      var i=+this.dataset.i; D.skills[i].pct=+this.value;
+      document.getElementById('skp'+i).textContent=this.value+'%';
+    });
+  });
+  document.querySelectorAll('.sk-del').forEach(function(el){
+    el.addEventListener('click', function(){ D.skills.splice(+this.dataset.i,1); renderSkillsEditor(); });
   });
 }
 
+document.getElementById('addSkill').addEventListener('click', function(){
+  D.skills.push({icon:'⚡',name:'New Skill',pct:50});
+  renderSkillsEditor();
+});
+
+/* PROJECTS EDITOR */
+function renderProjectsEditor() {
+  document.getElementById('projectsEditor').innerHTML = (D.projects||[]).map(function(p,i){
+    return '<div class="proj-item">'
+      +'<h4>Project '+(i+1)+'</h4>'
+      +'<div class="ef"><label>TAG</label><input type="text" value="'+(p.tag||'')+'" class="pj-tag" data-i="'+i+'" placeholder="WEB APP"></div>'
+      +'<div class="ef"><label>สี TAG</label>'
+      +'<select class="pj-tc" data-i="'+i+'">'
+      +'<option value="tw" '+(p.tagclass==='tw'?'selected':'')+'>🟣 ม่วง</option>'
+      +'<option value="ta" '+(p.tagclass==='ta'?'selected':'')+'>🟢 เขียว</option>'
+      +'<option value="tm" '+(p.tagclass==='tm'?'selected':'')+'>🟡 เหลือง</option>'
+      +'</select></div>'
+      +'<div class="ef"><label>ชื่อ</label><input type="text" value="'+(p.name||'')+'" class="pj-name" data-i="'+i+'"></div>'
+      +'<div class="ef"><label>คำอธิบาย</label><textarea class="pj-desc" data-i="'+i+'">'+(p.desc||'')+'</textarea></div>'
+      +'<div class="ef"><label>เทคโนโลยี (คั่นด้วย ,)</label><input type="text" value="'+(p.tech||'')+'" class="pj-tech" data-i="'+i+'"></div>'
+      +'<button class="del-btn pj-del" data-i="'+i+'" style="margin-top:6px">🗑️ ลบ Project นี้</button>'
+      +'</div>';
+  }).join('');
+  document.querySelectorAll('.pj-tag,.pj-tc,.pj-name,.pj-desc,.pj-tech').forEach(function(el){
+    el.addEventListener('input', function(){
+      var i=+this.dataset.i;
+      if(this.classList.contains('pj-tag'))  D.projects[i].tag=this.value;
+      if(this.classList.contains('pj-tc'))   D.projects[i].tagclass=this.value;
+      if(this.classList.contains('pj-name')) D.projects[i].name=this.value;
+      if(this.classList.contains('pj-desc')) D.projects[i].desc=this.value;
+      if(this.classList.contains('pj-tech')) D.projects[i].tech=this.value;
+    });
+  });
+  document.querySelectorAll('.pj-del').forEach(function(el){
+    el.addEventListener('click', function(){ D.projects.splice(+this.dataset.i,1); renderProjectsEditor(); });
+  });
+}
+
+document.getElementById('addProject').addEventListener('click', function(){
+  D.projects.push({tag:'WEB APP',tagclass:'tw',name:'New Project',desc:'',tech:''});
+  renderProjectsEditor();
+});
+
+/* AVATAR UPLOAD */
+document.getElementById('avatarFile').addEventListener('change', async function(){
+  var file = this.files[0]; if(!file) return;
+  var reader = new FileReader();
+  reader.onload = function(e){
+    document.getElementById('editAvatar').innerHTML = '<img src="'+e.target.result+'" alt="avatar">';
+  };
+  reader.readAsDataURL(file);
+  try {
+    var form = new FormData(); form.append('avatar', file);
+    var res = await fetch('/api/upload-avatar', {
+      method:'POST', credentials:'include',
+      headers:{'Authorization': AUTH}, body:form
+    });
+    var d = await res.json();
+    if(res.ok){ D.avatarUrl = d.avatarUrl; showToast('อัปโหลดรูปสำเร็จ ✓'); }
+    else showToast(d.error||'อัปโหลดไม่สำเร็จ','error');
+  } catch(e){ showToast('อัปโหลดไม่สำเร็จ','error'); }
+});
+
+/* SAVE */
+document.getElementById('editSave').addEventListener('click', async function(){
+  D.name     = document.getElementById('eName').value || D.name;
+  D.role     = document.getElementById('eRole').value || D.role;
+  D.subtitle = document.getElementById('eSub').value  || D.subtitle;
+  D.bio      = document.getElementById('eBio').value  || D.bio;
+  D.email    = document.getElementById('eEmail').value;
+  D.github   = document.getElementById('eGithub').value;
+  D.linkedin = document.getElementById('eLinkedin').value;
+  D.instagram= document.getElementById('eInstagram').value;
+  try {
+    var res = await fetch('/api/profile', {
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':AUTH},
+      body: JSON.stringify(D)
+    });
+    if(res.ok){ render(); closeEdit(); showToast('บันทึกสำเร็จแล้ว! ✓'); }
+    else showToast('บันทึกไม่สำเร็จ','error');
+  } catch(e){ showToast('บันทึกไม่สำเร็จ','error'); }
+});
+
+/* ===== THEME ===== */
+function applyTheme(t) {
+  if(t==='dark') document.body.removeAttribute('data-theme');
+  else document.body.setAttribute('data-theme',t);
+  document.querySelectorAll('.th-btn').forEach(function(b){
+    b.classList.toggle('active', b.dataset.theme===t);
+  });
+}
 document.querySelectorAll('.th-btn').forEach(function(btn){
   btn.addEventListener('click', function(){
     applyTheme(this.dataset.theme);
     localStorage.setItem('theme', this.dataset.theme);
   });
 });
+applyTheme(localStorage.getItem('theme')||'dark');
 
-// โหลด theme ที่บันทึกไว้ก่อนเลย ก่อน DOMContentLoaded
-applyTheme(localStorage.getItem('theme') || 'dark');
-
-document.addEventListener('DOMContentLoaded', loadProfile);
-
-// ===== SECRET ADMIN KEY =====
-// กด Ctrl + Shift + A เพื่อไปหน้า Admin
-var adminKeys = [];
-document.addEventListener('keydown', function(e) {
-  if (e.ctrlKey && e.shiftKey && e.key === 'A') {
-    window.location.href = '/admin';
-  }
+/* ===== KEYBOARD SHORTCUTS ===== */
+// กด Ctrl+Shift+A เปิด login / หรือกด logo 3 ครั้ง
+var logoCount = 0, logoTimer;
+document.getElementById('logoClick').addEventListener('click', function(){
+  logoCount++;
+  clearTimeout(logoTimer);
+  if(logoCount >= 3){ logoCount=0; if(!isLoggedIn) openLogin(); else openEdit(); return; }
+  logoTimer = setTimeout(function(){ logoCount=0; }, 1000);
 });
 
-// ===== BLOCK DEVTOOLS =====
-document.addEventListener('keydown', function(e) {
-  if (
-    e.key === 'F12' ||
-    (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key)) ||
-    (e.ctrlKey && ['U','u'].includes(e.key))
-  ) {
+document.addEventListener('keydown', function(e){
+  if(e.ctrlKey && e.shiftKey && e.key==='A'){
     e.preventDefault();
-    return false;
+    if(!isLoggedIn) openLogin(); else openEdit();
+  }
+  // Block F12, Ctrl+U
+  if(e.key==='F12' ||
+    (e.ctrlKey && e.shiftKey && ['I','i','J','j','C','c'].includes(e.key)) ||
+    (e.ctrlKey && ['U','u'].includes(e.key))){
+    e.preventDefault();
   }
 });
 document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+
+document.addEventListener('DOMContentLoaded', loadProfile);
 </script>
 </body>
 </html>

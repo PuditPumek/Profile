@@ -160,7 +160,7 @@
 
 <script>
 let profileData = {};
-const AUTH = 'Basic ' + btoa('admin:admin123');
+// ใช้ credentials จาก browser Basic Auth popup แทน hardcode
 
 function showToast(msg, type = 'success') {
   const t = document.getElementById('toast');
@@ -230,7 +230,7 @@ document.getElementById('avatarFileInput').addEventListener('change', async func
     form.append('avatar', file);
     const res = await fetch('/api/upload-avatar', {
       method: 'POST',
-      headers: { 'Authorization': AUTH },
+      credentials: 'include',
       body: form
     });
     const data = await res.json();
@@ -324,13 +324,14 @@ document.getElementById('saveBtn').addEventListener('click', async () => {
   try {
     const res = await fetch('/api/profile', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': AUTH },
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
       body: JSON.stringify(profileData)
     });
     if (!res.ok) { const e = await res.json(); throw new Error(e.error || 'Save failed'); }
 
     showToast('บันทึกสำเร็จ! กำลังกลับหน้า Profile... ✓');
-    setTimeout(() => { window.location.href = '/'; }, 750);
+    setTimeout(() => { window.location.href = '/'; }, 1500);
 
   } catch (err) {
     showToast('บันทึกไม่สำเร็จ: ' + err.message, 'error');
